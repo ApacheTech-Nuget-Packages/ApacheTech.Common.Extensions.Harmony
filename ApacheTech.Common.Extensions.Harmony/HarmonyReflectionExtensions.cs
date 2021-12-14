@@ -133,7 +133,7 @@ namespace ApacheTech.Common.Extensions.Harmony
         #region Types
 
         /// <summary>
-        ///     Creates the instance of a specified Type.
+        ///     Creates the instance of a specified Type. Be aware that this will ignore all Service Providers, and attempt to directly instantiate a class.
         /// </summary>
         /// <param name="type">The type to create an instance of.</param>
         /// <returns>A new instance of the specified type.</returns>

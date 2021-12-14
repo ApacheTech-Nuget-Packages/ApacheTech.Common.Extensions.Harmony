@@ -3,8 +3,8 @@
 	<PropertyGroup>
 		<ApplicationIcon>__Icon.ico</ApplicationIcon>
 		<AssemblyName>ApacheTech.Common.Extensions.Harmony</AssemblyName>
-		<AssemblyVersion>1.0.1.0</AssemblyVersion>
-		<AssemblyFileVersion>1.0.1.0</AssemblyFileVersion>
+		<AssemblyVersion>1.1.0.0</AssemblyVersion>
+		<AssemblyFileVersion>1.1.0.0</AssemblyFileVersion>
 		<Authors>ApacheTech Solutions</Authors>
 
 		<Company>ApacheTech Solutions</Company>
@@ -38,7 +38,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<Title>Harmony Reflection Extensions</Title>
 
-		<Version>1.0.1.0</Version>
+		<Version>1.1.0.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -57,7 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -68,10 +68,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="0Harmony">
-			<HintPath>$(VINTAGE_STORY)\Lib\0Harmony.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
+	  <Reference Include="0Harmony">
+	    <HintPath>..\0Harmony.dll</HintPath>
+	    <Private>false</Private>
+	  </Reference>
 	</ItemGroup>
 
 </Project>
