@@ -1,15 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<Version>1.2.0.0</Version>
+
 		<ApplicationIcon>__Icon.ico</ApplicationIcon>
 		<AssemblyName>ApacheTech.Common.Extensions.Harmony</AssemblyName>
-		<AssemblyVersion>1.1.0.0</AssemblyVersion>
-		<AssemblyFileVersion>1.1.0.0</AssemblyFileVersion>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<AssemblyFileVersion>$(Version)</AssemblyFileVersion>
 		<Authors>ApacheTech Solutions</Authors>
 
 		<Company>ApacheTech Solutions</Company>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-		<Copyright>Copyright © ApacheTech Solutons, 2021. All Rights Reserved.</Copyright>
+		<Copyright>Copyright © ApacheTech Solutons, 2022. All Rights Reserved.</Copyright>
 
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>embedded</DebugType>
@@ -37,8 +39,6 @@
 
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<Title>Harmony Reflection Extensions</Title>
-
-		<Version>1.1.0.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -64,7 +64,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ApacheTech.Common.Extensions" Version="1.0.0" />
+		<PackageReference Include="ApacheTech.Common.Extensions" Version="1.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>
