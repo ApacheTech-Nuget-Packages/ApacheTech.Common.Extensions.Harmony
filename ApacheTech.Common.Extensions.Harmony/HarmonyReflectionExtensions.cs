@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using ApacheTech.Common.Extensions.System;
 using HarmonyLib;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -77,6 +76,29 @@ namespace ApacheTech.Common.Extensions.Harmony
             AccessTools.Property(instance.GetType(), propertyName).SetValue(instance, setVal);
         }
 
+        /// <summary>
+        ///     Gets a static property within the calling type. This can be an internal or private property within another assembly.
+        /// </summary>
+        /// <typeparam name="T">The type of property to return.</typeparam>
+        /// <param name="type">The type in which the property resides.</param>
+        /// <param name="propertyName">The name of the property to return.</param>
+        /// <returns>An object containing the value of the property, reflected by this instance.</returns>
+        public static T GetStaticProperty<T>(this Type type, string propertyName)
+        {
+            return (T)AccessTools.Property(type, propertyName).GetValue(null);
+        }
+
+        /// <summary>
+        ///     Sets a static property within the calling type. This can be an internal or private property within another assembly.
+        /// </summary>
+        /// <param name="type">The type in which the property resides.</param>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="setVal">The value to set the property to.</param>
+        public static void SetStaticProperty(this Type type, string propertyName, object setVal)
+        {
+            AccessTools.Property(type, propertyName).SetValue(null, setVal);
+        }
+
         #endregion
 
         #region Methods
@@ -116,6 +138,26 @@ namespace ApacheTech.Common.Extensions.Harmony
         }
 
         /// <summary>
+        ///     Calls a static method within an object, via reflection. This can be an internal or private method within another assembly.
+        /// </summary>
+        /// <param name="instance">The instance to call the method from.</param>
+        /// <param name="method">The name of the method to call.</param>
+        public static void CallStaticMethod(this object instance, string method)
+        {
+            AccessTools.Method(instance.GetType(), method)?.Invoke(null, null);
+        }
+
+        /// <summary>
+        ///     Calls a static method within a type, via reflection. This can be an internal or private method within another assembly.
+        /// </summary>
+        /// <param name="type">The type to call the method from.</param>
+        /// <param name="method">The name of the method to call.</param>
+        public static void CallStaticMethod(this Type type, string method)
+        {
+            AccessTools.Method(type, method)?.Invoke(null, null);
+        }
+
+        /// <summary>
         ///     Gets the <see cref="MethodInfo"/> for a method within an instance of a class, via reflection. This can be an internal or private method within another assembly.
         /// </summary>
         /// <param name="instance">The instance to get the method from.</param>
@@ -151,7 +193,7 @@ namespace ApacheTech.Common.Extensions.Harmony
         public static Type GetClassType(this Assembly assembly, string className)
         {
             var ts = AccessTools.GetTypesFromAssembly(assembly);
-            return ts.FirstOrNull(t => t.Name == className);
+            return ts.FirstOrDefault(t => t.Name == className);
         }
 
         #endregion
@@ -168,7 +210,7 @@ namespace ApacheTech.Common.Extensions.Harmony
         {
             return AccessTools.MakeDeepCopy<T>(source);
         }
-
+        
         #endregion
     }
 }
