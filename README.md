@@ -1,6 +1,6 @@
 # Harmony Reflection Extensions
 
-This package provides a set of extension methods that make advanced reflection in C# simple and elegant, especially for accessing `internal` and `private` members. These methods are designed to work at the object level, allowing you to get, set, and invoke fields, properties, and methods—even those not normally accessible—using the power of [Harmony](https://github.com/pardeike/Harmony)'s `AccessTools`.
+This package provides a set of extension methods that make advanced reflection in C# simple and elegant, especially for accessing `internal` and `private` members. These methods are designed to work at the object level, allowing you to get, set, and invoke fields, properties, and methods (even those not normally accessible) using the power of [Harmony](https://github.com/pardeike/Harmony)'s `AccessTools`.
 
 **What is Harmony?**  
 [Harmony](https://github.com/pardeike/Harmony) is a popular library for patching, replacing, and modifying .NET methods at runtime. This extension package leverages Harmony's robust reflection utilities to provide a more convenient API for everyday use.
