@@ -1,6 +1,27 @@
 # Harmony Reflection Extensions
 
-This package of extension methods gives an elegant way to use reflection on all kinds of objects within C#. Below, is a list of methods that are added at an object level, allowing simple and easy access to `internal` and `private` members.
+This package provides a set of extension methods that make advanced reflection in C# simple and elegant, especially for accessing `internal` and `private` members. These methods are designed to work at the object level, allowing you to get, set, and invoke fields, properties, and methods—even those not normally accessible—using the power of [Harmony](https://github.com/pardeike/Harmony)'s `AccessTools`.
+
+**What is Harmony?**  
+[Harmony](https://github.com/pardeike/Harmony) is a popular library for patching, replacing, and modifying .NET methods at runtime. This extension package leverages Harmony's robust reflection utilities to provide a more convenient API for everyday use.
+
+**Compatibility:**  
+- .NET 8 or later
+- Requires `Lib.Harmony` (not included)
+
+**Quick Example:**
+```csharp
+using ApacheTech.Common.Extensions.Harmony;
+
+// Access a private field
+var value = myObject.GetField<int>("_privateField");
+
+// Set a private property
+myObject.SetProperty("InternalProperty", 42);
+
+// Call a private method
+myObject.CallMethod("HiddenMethod");
+```
 
 All that is required is that `Lib.Harmony` should be included within your project. This package does not supply Harmony. Once installed, add the following using statement to your class file.
 
@@ -28,34 +49,43 @@ The following tables list all extension methods provided by this library, groupe
 
 | Method | Description |
 | --- | --- |
-| **GetField&lt;T&gt;** | Gets a field within the calling instanced object. This can be an internal or private field within another assembly. |
-| **GetFields&lt;T&gt;** | Gets an array of fields within the calling instanced object, of a specified Type. These can be an internal or private fields within another assembly. |
-| **SetField** | Sets a field within the calling instanced object. This can be an internal or private field within another assembly. |
+| `T? GetField<T>(this object instance, string fieldName)` | Gets a field within the calling instanced object. This can be an internal or private field within another assembly. |
+| `T?[]? GetFields<T>(this object instance)` | Gets an array of fields within the calling instanced object, of a specified type. These can be internal or private fields within another assembly. |
+| `void SetField(this object instance, string fieldName, object setVal)` | Sets a field within the calling instanced object. This can be an internal or private field within another assembly. |
 
 ## Properties
 
 | Method | Description |
 | --- | --- |
-| **GetProperty&lt;T&gt;** | Gets a property within the calling instanced object. This can be an internal or private property within another assembly. |
-| **SetProperty** | Sets a property within the calling instanced object. This can be an internal or private property within another assembly. |
+| `T? GetProperty<T>(this object instance, string propertyName)` | Gets a property within the calling instanced object. This can be an internal or private property within another assembly. |
+| `void SetProperty(this object instance, string propertyName, object setVal)` | Sets a property within the calling instanced object. This can be an internal or private property within another assembly. |
+| `T? GetStaticProperty<T>(this Type type, string propertyName)` | Gets a static property within the calling type. This can be an internal or private property within another assembly. |
+| `void SetStaticProperty(this Type type, string propertyName, object setVal)` | Sets a static property within the calling type. This can be an internal or private property within another assembly. |
+| `T?[]? GetProperties<T>(this object instance)` | Gets an array of properties within the calling instanced object, of a specified type. These can be internal or private properties within another assembly. |
 
 ## Methods
 
 | Method | Description |
 | --- | --- |
-| **CallMethod** |  (2 methods) Calls a method within an instance of an object, via reflection. This can be an internal or private method within another assembly. |
-| **CallMethod&lt;T&gt;** | Calls a method within an instance of an object, via reflection. This can be an internal or private method within another assembly. |
-| **GetMethod** | Gets the <see cref="MethodInfo"/> for a method within an instance of a class, via reflection. This can be an internal or private method within another assembly. |
+| `T? CallMethod<T>(this object instance, string method, params object[] args)` | Calls a method within an instance of an object, via reflection, and returns a value. This can be an internal or private method within another assembly. |
+| `void CallMethod(this object instance, string method, params object[] args)` | Calls a method within an instance of an object, via reflection. This can be an internal or private method within another assembly. |
+| `void CallMethod(this object instance, string method)` | Calls a method with no arguments within an instance of an object, via reflection. |
+| `void CallStaticMethod(this object instance, string method)` | Calls a static method within an object, via reflection. |
+| `void CallStaticMethod(this Type type, string method)` | Calls a static method within a type, via reflection. |
+| `MethodInfo GetMethod(this object instance, string method, Type[]? parameters = null, Type[]? generics = null)` | Gets the `MethodInfo` for a method within an instance of a class, via reflection. |
+| `void CallBaseMethod<TBaseClass>(this object instance, string method, params object[] args)` | Calls a base class method on an instance of an object via reflection. |
+| `TValue? CallBaseMethod<TBaseClass, TValue>(this object instance, string method, params object[] args)` | Calls a base class method on an instance of an object via reflection and returns its result. |
 
 ## Types
 
 | Method | Description |
 | --- | --- |
-| **GetClassType** | Gets the type of the class within an assembly, via reflection. |
-| **CreateInstance** | Creates the instance of a specified Type, using Harmony AccessTools. Be aware that this will ignore all Service Providers, and attempt to directly instantiate a class. |
+| `object CreateInstance(this Type type)` | Creates the instance of a specified Type, using Harmony AccessTools. Be aware that this will ignore all Service Providers, and attempt to directly instantiate a class. |
+| `Type? GetClassType(this Assembly assembly, string className)` | Gets the type of the class within an assembly, via reflection. |
 
 ## Objects
 
 | Method | Description |
 | --- | --- |
-| **DeepClone&lt;T&gt;** | Makes a deep copy of any object. |
+| `T DeepClone<T>(this T source) where T : class` | Makes a deep copy of any object. |
+| `void DeepClone<T>(this T source, out T copy) where T : class` | Makes a deep copy of any object and outputs the copy via an out parameter. |
