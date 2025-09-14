@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>2.0.1.0</Version>
+		<Version>2.1.0.0</Version>
+		<Nullable>enable</Nullable>
 
 		<ApplicationIcon>__Icon.ico</ApplicationIcon>
 		<AssemblyName>ApacheTech.Common.Extensions.Harmony</AssemblyName>
@@ -28,9 +29,9 @@
 		<PackageLicenseFile>LICENCE.md</PackageLicenseFile>
 		<PackageProjectUrl>https://apachetech.co.uk</PackageProjectUrl>
 		<PackageReleaseNotes>
-			ApacheTech.Common.Extensions.Harmony v2.0.1
+			ApacheTech.Common.Extensions.Harmony v2.1.0
 
-			- Added: Debug configuration now uses project references, to aid debugging.
+			- Build: Updated to .NET 8.0 SDK.
 		</PackageReleaseNotes>
 		<PackageTags>C#</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -40,45 +41,26 @@
 		<RepositoryUrl>https://github.com/ApacheTechSolutions/ApacheTech.Common.Extensions.Harmony</RepositoryUrl>
 		<RootNamespace>ApacheTech.Common.Extensions.Harmony</RootNamespace>
 
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Title>Harmony Reflection Extensions</Title>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="README.md">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<None Include="LICENCE.md">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<None Include="__PreviewImage.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
+		<None Include="..\..\README.md" Pack="true" PackagePath="" />
+		<None Include="..\..\LICENCE.md" Pack="true" PackagePath="" />
+		<None Include="__PreviewImage.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+		<PackageReference Include="Lib.Harmony" Version="2.3.6" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' != 'Debug'">
-		<PackageReference Include="ApacheTech.Common.Extensions" Version="2.0.1" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
-	  <ProjectReference Include="..\..\ApacheTech.Common.Extensions\ApacheTech.Common.Extensions\ApacheTech.Common.Extensions.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Include="0Harmony">
-	    <HintPath>..\0Harmony.dll</HintPath>
-	    <Private>false</Private>
-	  </Reference>
+		<PackageReference Include="ApacheTech.Common.Extensions" Version="2.1.0" />
 	</ItemGroup>
 
 </Project>
